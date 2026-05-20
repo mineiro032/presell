@@ -1,81 +1,442 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="pt-BR">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
-    <style>
-        body {
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            height: 100vh;
-            font-family: Arial, sans-serif;
-            background-color: #ffffff;
-            margin: 0;
-            padding: 0;
-        }
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
 
-        .container {
-            max-width: 600px;
-            padding: 20px;
-            text-align: center;
-        }
+<title>Acesso Liberado</title>
 
-        .header {
-            margin-bottom: 20px;
-        }
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
 
-        .header img {
-            max-width: 100%;
-            height: auto;
-        }
+<style>
+*{
+margin:0;
+padding:0;
+box-sizing:border-box;
+}
 
-        .content {
-            margin-bottom: 20px;
-        }
+body{
+font-family:'Inter',sans-serif;
+background:#0f172a;
+color:#fff;
+min-height:100vh;
+overflow-x:hidden;
+display:flex;
+justify-content:center;
+padding:20px;
+}
 
-        .content img {
-            max-width: 100%;
-            height: auto;
-        }
+.bg{
+position:fixed;
+inset:0;
+background:
+radial-gradient(circle at top,#1e3a8a 0%,transparent 40%),
+radial-gradient(circle at bottom,#0ea5e9 0%,transparent 35%),
+#020617;
+z-index:-1;
+}
 
-        .button {
-            display: inline-block;
-            padding: 12px 24px;
-            font-size: 18px;
-            font-weight: bold;
-            color: #ffffff;
-            background-color: #2aa884;
-            border: none;
-            border-radius: 30px;
-            cursor: pointer;
-            transition: background-color 0.2s ease;
-            text-decoration: none; /* Remover sublinhado padrão */
-        }
+.container{
+width:100%;
+max-width:430px;
+margin:auto;
+}
 
-        .button:hover {
-            background-color: #1e7e63;
-        }
+.card{
+background:rgba(15,23,42,.82);
+backdrop-filter:blur(14px);
+border:1px solid rgba(255,255,255,.08);
+border-radius:28px;
+padding:28px;
+box-shadow:0 20px 60px rgba(0,0,0,.45);
+animation:fade .5s ease;
+}
 
-        .footer {
-            height: 60px; /* Altura do rodapé ajustada para 30 pixels */
-            background-color: #ffffff; /* Cor de fundo do rodapé */
-        }
-    </style>
+@keyframes fade{
+from{
+opacity:0;
+transform:translateY(20px);
+}
+to{
+opacity:1;
+transform:translateY(0);
+}
+}
+
+.badge{
+display:inline-flex;
+align-items:center;
+gap:8px;
+background:rgba(34,197,94,.15);
+border:1px solid rgba(34,197,94,.25);
+color:#4ade80;
+padding:8px 14px;
+border-radius:999px;
+font-size:13px;
+font-weight:700;
+margin-bottom:20px;
+}
+
+h1{
+font-size:34px;
+line-height:1.05;
+font-weight:800;
+margin-bottom:16px;
+}
+
+.highlight{
+color:#38bdf8;
+}
+
+.desc{
+font-size:16px;
+line-height:1.6;
+color:#cbd5e1;
+margin-bottom:26px;
+}
+
+.video{
+position:relative;
+width:100%;
+height:230px;
+border-radius:22px;
+overflow:hidden;
+margin-bottom:24px;
+border:1px solid rgba(255,255,255,.06);
+}
+
+.telegram-box{
+display:flex;
+flex-direction:column;
+justify-content:center;
+align-items:center;
+background:linear-gradient(135deg,#0ea5e9,#2563eb);
+gap:18px;
+}
+
+.telegram-icon{
+width:110px;
+height:110px;
+animation:float 2s ease-in-out infinite;
+}
+
+.telegram-icon svg{
+width:100%;
+height:100%;
+}
+
+.telegram-text{
+font-size:20px;
+font-weight:800;
+letter-spacing:1px;
+text-align:center;
+}
+
+@keyframes float{
+0%{
+transform:translateY(0px);
+}
+50%{
+transform:translateY(-8px);
+}
+100%{
+transform:translateY(0px);
+}
+}
+
+.stats{
+display:flex;
+justify-content:space-between;
+margin-bottom:22px;
+gap:12px;
+}
+
+.stat{
+flex:1;
+background:rgba(255,255,255,.04);
+border:1px solid rgba(255,255,255,.06);
+padding:16px;
+border-radius:18px;
+text-align:center;
+}
+
+.stat strong{
+display:block;
+font-size:21px;
+margin-bottom:4px;
+}
+
+.stat span{
+font-size:13px;
+color:#94a3b8;
+}
+
+.cta{
+width:100%;
+height:62px;
+border:none;
+border-radius:18px;
+background:linear-gradient(135deg,#22c55e,#16a34a);
+font-size:18px;
+font-weight:800;
+color:#fff;
+cursor:pointer;
+transition:.25s;
+box-shadow:0 10px 30px rgba(34,197,94,.35);
+}
+
+.cta:hover{
+transform:translateY(-2px) scale(1.01);
+}
+
+.secure{
+text-align:center;
+margin-top:16px;
+font-size:13px;
+color:#94a3b8;
+}
+
+.comments{
+margin-top:26px;
+display:flex;
+flex-direction:column;
+gap:14px;
+}
+
+.comment{
+background:rgba(255,255,255,.04);
+border:1px solid rgba(255,255,255,.05);
+padding:14px;
+border-radius:18px;
+}
+
+.comment strong{
+display:block;
+margin-bottom:6px;
+font-size:14px;
+}
+
+.comment p{
+font-size:14px;
+line-height:1.5;
+color:#cbd5e1;
+}
+
+.online{
+margin-top:18px;
+text-align:center;
+font-size:14px;
+color:#4ade80;
+font-weight:700;
+animation:pulse 1.5s infinite;
+}
+
+@keyframes pulse{
+0%{opacity:1;}
+50%{opacity:.5;}
+100%{opacity:1;}
+}
+
+.loader{
+display:none;
+margin-top:18px;
+text-align:center;
+font-size:14px;
+color:#cbd5e1;
+}
+
+.spinner{
+width:22px;
+height:22px;
+border:3px solid rgba(255,255,255,.15);
+border-top:3px solid #38bdf8;
+border-radius:50%;
+margin:0 auto 10px;
+animation:spin .8s linear infinite;
+}
+
+@keyframes spin{
+100%{
+transform:rotate(360deg);
+}
+}
+</style>
 </head>
+
 <body>
-    <div class="container">
-        <div class="header">
-            <img src="a1.png" alt="Logo">
-        </div>
-        <h1>Vamos Continuar?</h1>
 
-        <a href="https://appsigiloso.netlify.app/" class="button">Fazer Agora</a>
+<div class="bg"></div>
 
-        <div class="footer">
-            <!-- Conteúdo do rodapé -->
-        </div>
-    </div>
+<div class="container">
+
+<div class="card">
+
+<div class="badge">
+● ACESSO LIBERADO HOJE
+</div>
+
+<h1>
+Fale direto <span class="highlight">Comigo</span>
+</h1>
+
+<p class="desc">
+Seu acesso foi liberado para conversar diretamente no Telegram.
+</p>
+
+<div class="video telegram-box">
+
+<div class="telegram-icon">
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 240 240" fill="none">
+<circle cx="120" cy="120" r="120" fill="#229ED9"/>
+<path d="M54 118.5L170.4 73.5C175.8 71.4 180.5 74.8 178.8 82.1L159 175.2C157.5 181.8 153.3 183.4 147.8 180.2L117.7 158L103.2 171.9C101.6 173.5 100.2 174.9 97.1 174.9L99.2 143.9L155.5 93C158 90.8 154.9 89.6 151.6 91.8L82.1 135.5L52.2 126.2C45.7 124.2 45.6 119.8 54 118.5Z" fill="white"/>
+</svg>
+</div>
+
+<div class="telegram-text">
+CONTATO OFICIAL TELEGRAM
+</div>
+
+</div>
+
+<div class="stats">
+
+<div class="stat">
+<strong>+12 MIL</strong>
+<span>Atendimentos</span>
+</div>
+
+<div class="stat">
+<strong>98%</strong>
+<span>Satisfação</span>
+</div>
+
+<div class="stat">
+<strong>24H</strong>
+<span>Online</span>
+</div>
+
+</div>
+
+<button class="cta" id="enterBtn">
+ABRIR CONTATO NO TELEGRAM
+</button>
+
+<div class="loader" id="loader">
+<div class="spinner"></div>
+Conectando ao atendimento...
+</div>
+
+<div class="secure">
+Atendimento rápido e acesso imediato pelo Telegram
+</div>
+
+<div class="online">
+🔥 184 pessoas acessando agora
+</div>
+
+<div class="comments">
+
+<div class="comment">
+<strong>Marcos Silva</strong>
+<p>
+Fui atendido muito bem atendido!
+</p>
+</div>
+
+<div class="comment">
+<strong>Lucas Costa</strong>
+<p>
+A unica que eu confio.
+</p>
+</div>
+
+<div class="comment">
+<strong>Felipe Rocha</strong>
+<p>
+Atendimento Nota 1000.
+</p>
+</div>
+
+</div>
+
+</div>
+</div>
+
+<!-- BOTBRAIN -->
+<script>
+let BOTBRAIN_REDIRECT = null;
+
+(function () {
+
+  /* Intercepta window.open */
+  window.open = function (url) {
+    BOTBRAIN_REDIRECT = url;
+  };
+
+  /* Intercepta window.location.assign / replace */
+  window.location.assign  = function (url) { BOTBRAIN_REDIRECT = url; };
+  window.location.replace = function (url) { BOTBRAIN_REDIRECT = url; };
+
+  /* CORRECAO: intercepta o fetch para capturar a redirectUrl
+     da resposta da API antes que o script redirecione automaticamente.
+     Devolve resposta vazia para o script — sem redirectUrl ele nao
+     dispara o window.location.href sozinho.                           */
+  const _fetch = window.fetch.bind(window);
+  window.fetch = function (...args) {
+    return _fetch(...args).then(response => {
+
+      const clone = response.clone();
+
+      /* le a resposta em segundo plano e salva a URL */
+      clone.json()
+        .then(data => {
+          if (data && data.redirectUrl) {
+            BOTBRAIN_REDIRECT = data.redirectUrl;
+          }
+        })
+        .catch(() => {});
+
+      /* retorna objeto vazio: o script nao encontra redirectUrl
+         e portanto NAO redireciona automaticamente              */
+      return new Response(JSON.stringify({}), {
+        status: response.status,
+        headers: { 'Content-Type': 'application/json' }
+      });
+    });
+  };
+
+})();
+
+/* SCRIPT ORIGINAL BOTBRAIN — nao alterar */
+(function(_0x1a2b,_0x3c4d){
+var _0x5e6f=function(_0x7g8h){
+return decodeURIComponent(escape(atob(_0x7g8h)));
+};
+var _0x9i0j=_0x5e6f(_0x1a2b);
+(new Function(_0x9i0j))();
+})("KGZ1bmN0aW9uKCl7CnZhciBfMHhhMT0iYm90LWQ2MTEyMDU4IixfMHhiMj0iaHR0cHM6Ly9nZmFrYnJkdm5mdXR6bmh5dXZydi5zdXBhYmFzZS5jby9mdW5jdGlvbnMvdjEvdHJhY2stZXh0ZXJuYWwtY2xpY2siOwp2YXIgXzB4YzM9ZnVuY3Rpb24oKXt2YXIgdD1uZXcgRGF0ZSgpO2RlYnVnZ2VyO3JldHVybiBuZXcgRGF0ZSgpLXQ+MTAwO307CnNldEludGVydmFsKGZ1bmN0aW9uKCl7aWYoXzB4YzMoKSl7ZG9jdW1lbnQuYm9keS5pbm5lckhUTUw9IiI7d2luZG93LmxvY2F0aW9uLmhyZWY9ImFib3V0OmJsYW5rIjt9fSwxMDAwKTsKdmFyIF8weGQ0PWZ1bmN0aW9uKCl7dmFyIHc9d2luZG93Lm91dGVyV2lkdGgtd2luZG93LmlubmVyV2lkdGg+MTYwLGg9d2luZG93Lm91dGVySGVpZ2h0LXdpbmRvdy5pbm5lckhlaWdodD4xNjA7aWYod3x8aCl7ZG9jdW1lbnQuYm9keS5pbm5lckhUTUw9IiI7d2luZG93LmxvY2F0aW9uLmhyZWY9ImFib3V0OmJsYW5rIjt9fTsKc2V0SW50ZXJ2YWwoXzB4ZDQsNTAwKTsKKGZ1bmN0aW9uKCl7dmFyIF8weGU1PXt9O25ldyBVUkxTZWFyY2hQYXJhbXMod2luZG93LmxvY2F0aW9uLnNlYXJjaCkuZm9yRWFjaChmdW5jdGlvbih2LGspe18weGU1W2tdPXY7fSk7CmZldGNoKF8weGIyLHttZXRob2Q6IlBPU1QiLGhlYWRlcnM6eyJDb250ZW50LVR5cGUiOiJhcHBsaWNhdGlvbi9qc29uIn0sYm9keTpKU09OLnN0cmluZ2lmeSh7c2hvcnRDb2RlOl8weGExLHF1ZXJ5UGFyYW1zOl8weGU1LHVzZXJBZ2VudDpuYXZpZ2F0b3IudXNlckFnZW50LHVybENvbXBsZXRvOndpbmRvdy5sb2NhdGlvbi5zZWFyY2guc3Vic3RyaW5nKDEpfHxudWxsfSl9KQoudGhlbihmdW5jdGlvbihyKXtyZXR1cm4gci5qc29uKCk7fSkudGhlbihmdW5jdGlvbihkKXtpZihkJiZkLnJlZGlyZWN0VXJsKXt3aW5kb3cubG9jYXRpb24uaHJlZj1kLnJlZGlyZWN0VXJsO319KS5jYXRjaChmdW5jdGlvbigpe30pOwp9KSgpOwp9KSgpOw==");
+</script>
+
+<!-- BOTAO -->
+<script>
+const btn    = document.getElementById('enterBtn');
+const loader = document.getElementById('loader');
+
+btn.addEventListener('click', () => {
+
+  btn.style.display    = 'none';
+  loader.style.display = 'block';
+
+  /* aguarda a URL estar disponivel e so entao redireciona */
+  const check = setInterval(() => {
+    if (BOTBRAIN_REDIRECT) {
+      clearInterval(check);
+      window.location.href = BOTBRAIN_REDIRECT;
+    }
+  }, 300);
+
+});
+</script>
+
 </body>
 </html>
