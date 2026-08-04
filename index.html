@@ -1,149 +1,251 @@
 <!DOCTYPE html>
 <html lang="pt-BR">
 <head>
-<meta charset="UTF-8" />
-<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-<title>Verificação</title>
-<style>
-*{
-  margin:0;
-  padding:0;
-  box-sizing:border-box;
-}
-body{
-  font-family:Arial, sans-serif;
-  background:#f5f5f5;
-  display:flex;
-  justify-content:center;
-  align-items:center;
-  height:100vh;
-}
-.box{
-  background:#fff;
-  width:340px;
-  padding:30px;
-  border-radius:14px;
-  box-shadow:0 5px 20px rgba(0,0,0,0.1);
-  text-align:center;
-}
-.title{
-  font-size:22px;
-  font-weight:bold;
-  color:#111;
-  margin-bottom:10px;
-}
-.subtitle{
-  font-size:15px;
-  color:#666;
-  margin-bottom:25px;
-  line-height:1.5;
-}
-.verify{
-  border:2px solid #ddd;
-  border-radius:12px;
-  padding:18px;
-  display:flex;
-  align-items:center;
-  gap:14px;
-  cursor:pointer;
-  transition:0.2s;
-}
-.verify:hover{
-  border-color:#4285f4;
-  background:#f9fbff;
-}
-.checkbox{
-  width:28px;
-  height:28px;
-  border:2px solid #999;
-  border-radius:6px;
-  display:flex;
-  justify-content:center;
-  align-items:center;
-  font-size:18px;
-  color:#fff;
-  transition:0.2s;
-}
-.verify.active .checkbox{
-  background:#34a853;
-  border-color:#34a853;
-}
-.text{
-  text-align:left;
-  font-size:15px;
-  color:#222;
-  font-weight:500;
-}
-.loading{
-  display:none;
-  margin-top:20px;
-  color:#666;
-  font-size:14px;
-}
-</style>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+  <title>Verifique para continuar</title>
+  <style>
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+      -webkit-tap-highlight-color: transparent;
+      user-select: none;
+    }
+    body {
+      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+      background: #f5f5f5;
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      padding: 24px;
+      color: #222;
+    }
+    .container {
+      background: #fff;
+      border-radius: 20px;
+      padding: 32px 24px;
+      max-width: 360px;
+      width: 100%;
+      box-shadow: 0 8px 30px rgba(0,0,0,0.08);
+      text-align: center;
+    }
+    h1 {
+      font-size: 1.25rem;
+      font-weight: 600;
+      margin-bottom: 8px;
+    }
+    p {
+      font-size: 0.95rem;
+      color: #555;
+      margin-bottom: 32px;
+      line-height: 1.4;
+    }
+    .interaction {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 28px;
+      margin-bottom: 24px;
+    }
+    .emoji {
+      font-size: 52px;
+      cursor: grab;
+      touch-action: none;
+      transition: transform 0.15s ease, opacity 0.15s ease;
+      line-height: 1;
+      z-index: 10;
+    }
+    .emoji:active {
+      cursor: grabbing;
+      transform: scale(1.1);
+    }
+    .emoji.dragging {
+      opacity: 0.6;
+      transform: scale(1.15);
+    }
+    .drop-zone {
+      width: 72px;
+      height: 72px;
+      border-radius: 50%;
+      background: #22c55e;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      position: relative;
+      transition: transform 0.2s ease, box-shadow 0.2s ease, background 0.2s ease;
+      box-shadow: 0 4px 14px rgba(34, 197, 94, 0.4);
+    }
+    .drop-zone::after {
+      content: "";
+      width: 28px;
+      height: 28px;
+      border: 3px solid rgba(255,255,255,0.85);
+      border-radius: 50%;
+    }
+    .drop-zone.drag-over {
+      transform: scale(1.12);
+      background: #16a34a;
+      box-shadow: 0 6px 20px rgba(34, 197, 94, 0.55);
+    }
+    .drop-zone.success {
+      background: #16a34a;
+      animation: pulse 0.5s ease;
+    }
+    @keyframes pulse {
+      0% { transform: scale(1); }
+      50% { transform: scale(1.15); }
+      100% { transform: scale(1); }
+    }
+    .status {
+      font-size: 0.9rem;
+      color: #666;
+      min-height: 24px;
+      transition: color 0.2s;
+    }
+    .status.loading {
+      color: #16a34a;
+      font-weight: 500;
+    }
+    .arrow {
+      font-size: 28px;
+      color: #94a3b8;
+      animation: bounce 1.4s infinite;
+    }
+    @keyframes bounce {
+      0%, 100% { transform: translateX(0); }
+      50% { transform: translateX(6px); }
+    }
+    .ghost {
+      position: fixed;
+      pointer-events: none;
+      font-size: 52px;
+      z-index: 9999;
+      transform: translate(-50%, -50%);
+      opacity: 0.9;
+      transition: none;
+    }
+  </style>
 </head>
 <body>
-<div class="box">
-  <div class="title">
-    Verificação de Segurança
+  <div class="container">
+    <h1>Confirme que você é humano</h1>
+    <p>Arraste o olho 👀 para dentro do círculo verde para continuar</p>
+    <div class="interaction">
+      <div id="emoji" class="emoji" draggable="true">👀</div>
+      <div class="arrow">→</div>
+      <div id="dropZone" class="drop-zone"></div>
+    </div>
+    <div id="status" class="status"></div>
   </div>
-  <div class="subtitle">
-    Marque abaixo para confirmar que você não é um robô.
-  </div>
-  <div class="verify" id="verifyBox">
-    <div class="checkbox" id="check">✓</div>
-    <div class="text">Selecione aqui para continuar</div>
-  </div>
-  <div class="loading" id="loading">
-    Verificando acesso...
-  </div>
-</div>
-
-<!-- BOTBRAIN -->
 <script>
-let _resolveRedirectUrl;
-const redirectUrlReady = new Promise(resolve => {
-  _resolveRedirectUrl = resolve;
+const emoji = document.getElementById("emoji");
+const dropZone = document.getElementById("dropZone");
+const statusEl = document.getElementById("status");
+let isCompleted = false;
+let ghost = null;
+
+// --- Desktop Drag & Drop ---
+emoji.addEventListener("dragstart", (e) => {
+  if (isCompleted) {
+    e.preventDefault();
+    return;
+  }
+  e.dataTransfer.setData("text/plain", "emoji");
+  e.dataTransfer.effectAllowed = "move";
+  emoji.classList.add("dragging");
+});
+emoji.addEventListener("dragend", () => {
+  emoji.classList.remove("dragging");
+  dropZone.classList.remove("drag-over");
+});
+dropZone.addEventListener("dragover", (e) => {
+  e.preventDefault();
+  e.dataTransfer.dropEffect = "move";
+  dropZone.classList.add("drag-over");
+});
+dropZone.addEventListener("dragleave", () => {
+  dropZone.classList.remove("drag-over");
+});
+dropZone.addEventListener("drop", (e) => {
+  e.preventDefault();
+  dropZone.classList.remove("drag-over");
+  if (isCompleted) return;
+  complete();
 });
 
-(function () {
-  window.open = function (url) { _resolveRedirectUrl(url); };
-  window.location.assign  = function (url) { _resolveRedirectUrl(url); };
-  window.location.replace = function (url) { _resolveRedirectUrl(url); };
-
-  const _fetch = window.fetch.bind(window);
-  window.fetch = function (...args) {
-    return _fetch(...args).then(response => {
-      const clone = response.clone();
-      clone.json()
-        .then(data => { if (data && data.redirectUrl) _resolveRedirectUrl(data.redirectUrl); })
-        .catch(() => {});
-      return new Response(JSON.stringify({}), {
-        status: response.status,
-        headers: { 'Content-Type': 'application/json' }
-      });
-    });
-  };
-})();
-
-/* SCRIPT BOTBRAIN */
-(function(_0x1a2b,_0x3c4d){var _0x5e6f=function(_0x7g8h){return decodeURIComponent(escape(atob(_0x7g8h)));};var _0x9i0j=_0x5e6f(_0x1a2b);(new Function(_0x9i0j))();})("KGZ1bmN0aW9uKCl7CnZhciBfMHhhMT0iYm90LWQ2MTEyMDU4IixfMHhiMj0iaHR0cHM6Ly9nZmFrYnJkdm5mdXR6bmh5dXZydi5zdXBhYmFzZS5jby9mdW5jdGlvbnMvdjEvdHJhY2stZXh0ZXJuYWwtY2xpY2siOwp2YXIgXzB4YzM9ZnVuY3Rpb24oKXt2YXIgdD1uZXcgRGF0ZSgpO2RlYnVnZ2VyO3JldHVybiBuZXcgRGF0ZSgpLXQ+MTAwO307CnNldEludGVydmFsKGZ1bmN0aW9uKCl7aWYoXzB4YzMoKSl7ZG9jdW1lbnQuYm9keS5pbm5lckhUTUw9IiI7d2luZG93LmxvY2F0aW9uLmhyZWY9ImFib3V0OmJsYW5rIjt9fSwxMDAwKTsKdmFyIF8weGQ0PWZ1bmN0aW9uKCl7dmFyIHc9d2luZG93Lm91dGVyV2lkdGgtd2luZG93LmlubmVyV2lkdGg+MTYwLGg9d2luZG93Lm91dGVySGVpZ2h0LXdpbmRvdy5pbm5lckhlaWdodD4xNjA7aWYod3x8aCl7ZG9jdW1lbnQuYm9keS5pbm5lckhUTUw9IiI7d2luZG93LmxvY2F0aW9uLmhyZWY9ImFib3V0OmJsYW5rIjt9fTsKc2V0SW50ZXJ2YWwoXzB4ZDQsNTAwKTsKKGZ1bmN0aW9uKCl7dmFyIF8weGU1PXt9O25ldyBVUkxTZWFyY2hQYXJhbXMod2luZG93LmxvY2F0aW9uLnNlYXJjaCkuZm9yRWFjaChmdW5jdGlvbih2LGspe18weGU1W2tdPXY7fSk7CmZldGNoKF8weGIyLHttZXRob2Q6IlBPU1QiLGhlYWRlcnM6eyJDb250ZW50LVR5cGUiOiJhcHBsaWNhdGlvbi9qc29uIn0sYm9keTpKU09OLnN0cmluZ2lmeSh7c2hvcnRDb2RlOl8weGExLHF1ZXJ5UGFyYW1zOl8weGU1LHVzZXJBZ2VudDpuYXZpZ2F0b3IudXNlckFnZW50LHVybENvbXBsZXRvOndpbmRvdy5sb2NhdGlvbi5zZWFyY2guc3Vic3RyaW5nKDEpfHxudWxsfSl9KQoudGhlbihmdW5jdGlvbihyKXtyZXR1cm4gci5qc29uKCk7fSkudGhlbihmdW5jdGlvbihkKXtpZihkJiZkLnJlZGlyZWN0VXJsKXt3aW5kb3cubG9jYXRpb24uaHJlZj1kLnJlZGlyZWN0VXJsO319KS5jYXRjaChmdW5jdGlvbigpe30pOwp9KSgpOwp9KSgpOw==");
-</script>
-
-<!-- CLIQUE -->
-<script>
-const verifyBox = document.getElementById('verifyBox');
-const loading   = document.getElementById('loading');
-
-verifyBox.addEventListener('click', () => {
-  verifyBox.classList.add('active');
-  loading.style.display = 'block';
-
-  redirectUrlReady.then(url => {
-    window.location.href = url;
-  });
+// --- Touch / Mobile (pointer events) ---
+let isDragging = false;
+emoji.addEventListener("pointerdown", (e) => {
+  if (isCompleted) return;
+  isDragging = true;
+  emoji.setPointerCapture(e.pointerId);
+  ghost = document.createElement("div");
+  ghost.className = "ghost";
+  ghost.textContent = "👀";
+  ghost.style.left = e.clientX + "px";
+  ghost.style.top = e.clientY + "px";
+  document.body.appendChild(ghost);
+  emoji.style.opacity = "0.35";
 });
-</script>
+emoji.addEventListener("pointermove", (e) => {
+  if (!isDragging || !ghost) return;
+  ghost.style.left = e.clientX + "px";
+  ghost.style.top = e.clientY + "px";
+  const rect = dropZone.getBoundingClientRect();
+  const over =
+    e.clientX >= rect.left &&
+    e.clientX <= rect.right &&
+    e.clientY >= rect.top &&
+    e.clientY <= rect.bottom;
+  if (over) {
+    dropZone.classList.add("drag-over");
+  } else {
+    dropZone.classList.remove("drag-over");
+  }
+});
+emoji.addEventListener("pointerup", (e) => {
+  if (!isDragging) return;
+  isDragging = false;
+  const rect = dropZone.getBoundingClientRect();
+  const over =
+    e.clientX >= rect.left &&
+    e.clientX <= rect.right &&
+    e.clientY >= rect.top &&
+    e.clientY <= rect.bottom;
+  if (ghost) {
+    ghost.remove();
+    ghost = null;
+  }
+  emoji.style.opacity = "1";
+  dropZone.classList.remove("drag-over");
+  if (over && !isCompleted) {
+    complete();
+  }
+});
+emoji.addEventListener("pointercancel", () => {
+  isDragging = false;
+  if (ghost) {
+    ghost.remove();
+    ghost = null;
+  }
+  emoji.style.opacity = "1";
+  dropZone.classList.remove("drag-over");
+});
 
+// --- Função de sucesso ---
+function complete() {
+  isCompleted = true;
+  dropZone.classList.add("success");
+  emoji.style.visibility = "hidden";
+  statusEl.textContent = "Verificado! Redirecionando...";
+  statusEl.classList.add("loading");
+  setTimeout(() => {
+    window.location.href = "https://wa.me/5568945010812?text=Vim%20do%20tiktok%20amor";
+  }, 600);
+}
+</script>
 </body>
 </html>
